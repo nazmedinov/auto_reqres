@@ -1,10 +1,11 @@
+from typing import Optional
 from pydantic import BaseModel, field_validator, model_validator
 
 class UserCreateModel(BaseModel):
     name: str
     job: str
     id: str
-    createdAt: str
+    createdAt: Optional[str]
 
     @model_validator(mode='after')
     def fields_are_not_empty(cls, values):
