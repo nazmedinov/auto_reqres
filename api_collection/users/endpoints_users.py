@@ -1,4 +1,4 @@
-from conftest import HOST
+from api_collection.config import HOST
 
 class Endpoints:
     create_user = f'{HOST}/users'
