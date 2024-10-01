@@ -1,4 +1,5 @@
 import requests
+import allure
 
 from api_collection.users.payloads_users import Payloads
 from api_collection.headers import Headers
@@ -16,29 +17,32 @@ class UsersAPI:
         self.payload = Payloads()
 
     def create_user(self, name='John', job='Engineer'):
-        response = requests.post(
-            url=self.endpoints.create_user,
-            headers=self.headers.basic,
-            json=self.payload.create_user_payload(name, job)
-        )
+        with allure.step('Создание нового юзера'):
+            response = requests.post(
+                url=self.endpoints.create_user,
+                headers=self.headers.basic,
+                json=self.payload.create_user_payload(name, job)
+            )
         assert response.status_code == 201, response.json()
         model = UserCreateModel(**response.json())
         return model
 
     def get_users_list(self):
-        response = requests.get(
-            url=self.endpoints.get_users_list,
-            headers=self.headers.basic
-        )
+        with allure.step('Получение списка юзеров'):
+            response = requests.get(
+                url=self.endpoints.get_users_list,
+                headers=self.headers.basic
+            )
         assert response.status_code == 200, response.json()
         model = GetUsersListModel(**response.json())
         return model
 
     def get_user_by_id(self, user_id):
-        response = requests.get(
-            url=self.endpoints.get_user_by_id(user_id),
-            headers=self.headers.basic
-        )
+        with allure.step(f'Получение юзера по id {user_id}'):
+            response = requests.get(
+                url=self.endpoints.get_user_by_id(user_id),
+                headers=self.headers.basic
+            )
 
         if response.status_code == 404:
             return None
@@ -48,18 +52,20 @@ class UsersAPI:
         return model
 
     def edit_exist_user(self, user_id, name='John', job='Engineer'):
-        response = requests.put(
-            url = self.endpoints.edit_exist_user(user_id),
-            headers=self.headers.basic,
-            json=self.payload.edit_exist_user(name, job),
-        )
+        with allure.step(f'Редактирование юзера по id {user_id}'):
+            response = requests.put(
+                url = self.endpoints.edit_exist_user(user_id),
+                headers=self.headers.basic,
+                json=self.payload.edit_exist_user(name, job),
+            )
         assert response.status_code == 200
         model = EditExistUserModel(**response.json())
         return model
 
     def delete_user(self, user_id):
-        response = requests.delete(
-            url=self.endpoints.delete_user(user_id),
-            headers=self.headers.basic
-        )
+        with allure.step(f'Удаление юзера с id {user_id}'):
+            response = requests.delete(
+                url=self.endpoints.delete_user(user_id),
+                headers=self.headers.basic
+            )
         assert response.status_code == 204

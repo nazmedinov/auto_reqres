@@ -2,3 +2,6 @@ pytest==8.3.3
 requests==2.32.3
 selenium==4.25.0
 pydantic==2.9.2
+allure-pytest==2.13.5
+# Allure CLI is required to generate reports
+# Install it via Homebrew: brew install allure
