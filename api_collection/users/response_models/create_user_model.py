@@ -19,7 +19,3 @@ class UserCreateModel(BaseModel):
         if len(value) < 3:
             raise ValueError('Name is less than 3 symbols')
         return value
-
-    123
-
-    123
