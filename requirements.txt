@@ -5,3 +5,4 @@ pydantic==2.9.2
 allure-pytest==2.13.5
 # Allure CLI is required to generate reports
 # Install it via Homebrew: brew install allure
+pytest-rerunfailures==14.0
