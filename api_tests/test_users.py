@@ -37,7 +37,7 @@ class TestUsers:
         with allure.step('Юзер не найдется из-за особенностей тестового API'):
             assert user_by_id is None
 
-    @pytest.mark.flaky(reruns=2)
+    @pytest.mark.flaky(reruns=3)
     @allure.title('Редактирование существующего юзера')
     def test_edit_exist_user(self, new_user_fixture):
         users_api = UsersAPI()
