@@ -21,4 +21,4 @@ class TestMainPage:
         main_page.switch_to_window(window_number=1)
         with allure.step('Успешный переход на страницу получения сертификата'):
             main_page.wait_for_visibility(MainPageLocators.TRAINING_PAGE_TITLE)
-            main_page.check_current_url(PagesURL.CERTIFICATE_PAGE_URL)
+            main_page.check_current_url(PagesURL.TRAINING_PAGE_URL)
